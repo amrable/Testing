@@ -9,5 +9,3 @@ class PhoneBook:
     def get(self, name):
         return self.contacts[name];
 
-
-print('hi')
