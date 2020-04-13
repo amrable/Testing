@@ -23,6 +23,20 @@ class PhoneBookTest(unittest.TestCase):
         with self.assertRaises(KeyError):
             self.phonebook.get("missing")
 
-    @unittest.skip("WIP")
     def test_empty_phonebook_is_consistent(self):
         self.assertTrue(self.phonebook.phonebook_is_consistent())
+
+    def test_is_consistent_with_different_entries(self):
+        self.phonebook.add_contact("Amr","123")
+        self.phonebook.add_contact("Ahmed","456")
+        self.assertTrue(self.phonebook.phonebook_is_consistent())
+
+    def test_is_inconsistent_with_duplicate_entries(self):
+        self.phonebook.add_contact("Amr", "123")
+        self.phonebook.add_contact("Ahmed", "123")
+        self.assertFalse(self.phonebook.phonebook_is_consistent())
+
+    def test_is_inconsistent_with_duplicate_prefix(self):
+        self.phonebook.add_contact("Amr", "123")
+        self.phonebook.add_contact("Ahmed", "12345")
+        self.assertFalse(self.phonebook.phonebook_is_consistent())
