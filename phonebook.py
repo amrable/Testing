@@ -1,7 +1,11 @@
+import os
+
 class PhoneBook:
 
     def __init__(self):
         self.contacts = {}
+        self.file_name = 'file.txt'
+        self.cache_file = open(self.file_name, 'w')
 
     def add_contact(self, name, number):
         self.contacts[name] = number
@@ -19,4 +23,6 @@ class PhoneBook:
                     return False
         return True
 
-
+    def clear(self):
+        self.cache_file.close()
+        os.remove(self.file_name)
